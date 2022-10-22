@@ -29,14 +29,24 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    //  The accepted method for 'attaching' to View widgets within UI layouts
+    //  Generates a binding class for each XML layout file present
+    //  An instance of a binding class contains direct references to all views that have an ID in the corresponding layout.
+    //  A layout file called result_profile.xml, generates a binding class called ResultProfileBinding
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
+    //additional library to support android components and layouts not included in the base SDK
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    // Logging Event Handling in Kotlin
+    implementation 'com.github.ajalt:timberkt:1.5.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

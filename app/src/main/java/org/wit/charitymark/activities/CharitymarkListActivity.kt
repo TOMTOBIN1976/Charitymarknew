@@ -52,36 +52,10 @@ class CharitymarkListActivity : AppCompatActivity(), CharitymarkListener {
         }
         return super.onOptionsItemSelected(item)
     }
-
+    // passing selected charity event to the activity (enabled via parcelable)
     override fun onCharitymarkClick(charitymark: CharitymarkModel) {
         val launcherIntent = Intent(this, CharitymarkActivity::class.java)
+        launcherIntent.putExtra("charitymark_edit", charitymark)
         startActivityForResult(launcherIntent,0)
     }
 }
-// Moved to charitymarkAdapter
-//class CharitymarkAdapter constructor(private var charitymarks: List<CharitymarkModel>) :
-//    RecyclerView.Adapter<CharitymarkAdapter.MainHolder>() {
-
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
-//        val binding = CardCharitymarkBinding
-//            .inflate(LayoutInflater.from(parent.context), parent, false)
-
-//        return MainHolder(binding)
-//    }
-
-//    override fun onBindViewHolder(holder: MainHolder, position: Int) {
-//        val charitymark = charitymarks[holder.adapterPosition]
-//        holder.bind(charitymark)
-//    }
-
-//    override fun getItemCount(): Int = charitymarks.size
-
-//    class MainHolder(private val binding : CardCharitymarkBinding) :
-//        RecyclerView.ViewHolder(binding.root) {
-
-//      fun bind(charitymark: CharitymarkModel) {
-//            binding.charitymarkTitle.text = charitymark.title
-//            binding.description.text = charitymark.description
-//        }
-//    }
-//}

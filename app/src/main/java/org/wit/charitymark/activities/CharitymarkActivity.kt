@@ -31,6 +31,13 @@ class CharitymarkActivity : AppCompatActivity() {
 
         app = application as MainApp
         i("Charitymark Activity started.")
+
+        if (intent.hasExtra("charitymark_edit")) {
+            charitymark = intent.extras?.getParcelable("charitymark_edit")!!
+            binding.charitymarkTitle.setText(charitymark.title)
+            binding.description.setText(charitymark.description)
+        }
+
         // bind to the Button
         binding.btnAdd.setOnClickListener() {
             charitymark.title = binding.charitymarkTitle.text.toString()

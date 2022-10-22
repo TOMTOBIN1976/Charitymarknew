@@ -3,17 +3,13 @@ package org.wit.charitymark.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import org.wit.charitymark.R
+import org.wit.charitymark.adapters.CharitymarkAdapter
 import org.wit.charitymark.databinding.ActivityCharitymarkListBinding
-import org.wit.charitymark.databinding.CardCharitymarkBinding
 import org.wit.charitymark.main.MainApp
-import org.wit.charitymark.models.CharitymarkModel
 
 class CharitymarkListActivity : AppCompatActivity() {
 
@@ -32,6 +28,7 @@ class CharitymarkListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
+        //Using adapter now
         binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks)
     }
     //override the method to load menu resource.
@@ -52,30 +49,30 @@ class CharitymarkListActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 }
+// Moved to charitymarkAdapter
+//class CharitymarkAdapter constructor(private var charitymarks: List<CharitymarkModel>) :
+//    RecyclerView.Adapter<CharitymarkAdapter.MainHolder>() {
 
-class CharitymarkAdapter constructor(private var charitymarks: List<CharitymarkModel>) :
-    RecyclerView.Adapter<CharitymarkAdapter.MainHolder>() {
+//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
+//        val binding = CardCharitymarkBinding
+//            .inflate(LayoutInflater.from(parent.context), parent, false)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
-        val binding = CardCharitymarkBinding
-            .inflate(LayoutInflater.from(parent.context), parent, false)
+//        return MainHolder(binding)
+//    }
 
-        return MainHolder(binding)
-    }
+//    override fun onBindViewHolder(holder: MainHolder, position: Int) {
+//        val charitymark = charitymarks[holder.adapterPosition]
+//        holder.bind(charitymark)
+//    }
 
-    override fun onBindViewHolder(holder: MainHolder, position: Int) {
-        val charitymark = charitymarks[holder.adapterPosition]
-        holder.bind(charitymark)
-    }
+//    override fun getItemCount(): Int = charitymarks.size
 
-    override fun getItemCount(): Int = charitymarks.size
+//    class MainHolder(private val binding : CardCharitymarkBinding) :
+//        RecyclerView.ViewHolder(binding.root) {
 
-    class MainHolder(private val binding : CardCharitymarkBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(charitymark: CharitymarkModel) {
-            binding.charitymarkTitle.text = charitymark.title
-            binding.description.text = charitymark.description
-        }
-    }
-}
+//      fun bind(charitymark: CharitymarkModel) {
+//            binding.charitymarkTitle.text = charitymark.title
+//            binding.description.text = charitymark.description
+//        }
+//    }
+//}

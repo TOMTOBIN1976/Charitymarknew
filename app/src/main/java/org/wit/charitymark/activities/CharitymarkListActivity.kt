@@ -8,10 +8,12 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.charitymark.R
 import org.wit.charitymark.adapters.CharitymarkAdapter
+import org.wit.charitymark.adapters.CharitymarkListener
 import org.wit.charitymark.databinding.ActivityCharitymarkListBinding
 import org.wit.charitymark.main.MainApp
+import org.wit.charitymark.models.CharitymarkModel
 
-class CharitymarkListActivity : AppCompatActivity() {
+class CharitymarkListActivity : AppCompatActivity(), CharitymarkListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityCharitymarkListBinding
@@ -30,7 +32,8 @@ class CharitymarkListActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = layoutManager
         //Replaced with memory store
         //binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks)
-        binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks.findAll())
+        //binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks.findAll())
+        binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks.findAll(),this)
     }
     //override the method to load menu resource.
     // Single button on the action bar (calling menu_main.xml)
@@ -48,6 +51,11 @@ class CharitymarkListActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCharitymarkClick(charitymark: CharitymarkModel) {
+        val launcherIntent = Intent(this, CharitymarkActivity::class.java)
+        startActivityForResult(launcherIntent,0)
     }
 }
 // Moved to charitymarkAdapter

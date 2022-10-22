@@ -28,8 +28,9 @@ class CharitymarkListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        //Using adapter now
-        binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks)
+        //Replaced with memory store
+        //binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks)
+        binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks.findAll())
     }
     //override the method to load menu resource.
     // Single button on the action bar (calling menu_main.xml)

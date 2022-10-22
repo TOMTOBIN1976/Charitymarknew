@@ -1,20 +1,18 @@
 package org.wit.charitymark.main
 
 import android.app.Application
-import org.wit.charitymark.models.CharitymarkModel
+import org.wit.charitymark.models.CharitymarkMemStore
 import timber.log.Timber
 import timber.log.Timber.i
 
 class MainApp : Application() {
-
-    val charitymarks = ArrayList<CharitymarkModel>()
+    //Using memory store now
+    //val charitymarks = ArrayList<CharitymarkModel>()
+    val charitymarks = CharitymarkMemStore()
 
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        i("Placemark started")
-        //charitymarks.add(CharitymarkModel("One", "About one..."))
-        //charitymarks.add(CharitymarkModel("Two", "About two..."))
-        //charitymarks.add(CharitymarkModel("Three", "About three..."))
+        i("Charitymark started")
     }
 }

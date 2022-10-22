@@ -36,11 +36,12 @@ class CharitymarkActivity : AppCompatActivity() {
             charitymark.title = binding.charitymarkTitle.text.toString()
             charitymark.description = binding.description.text.toString()
             if (charitymark.title.isNotEmpty()) {
-                app.charitymarks.add(charitymark.copy())
-                i("add Button Pressed: ${charitymark}")
-                for (i in app.charitymarks.indices) {
-                    i("Placemark[$i]:${this.app.charitymarks[i]}")
-                }
+                //app.charitymarks.add(charitymark.copy())
+                app.charitymarks.create(charitymark.copy())
+                //i("add Button Pressed: ${charitymark}")
+                //for (i in app.charitymarks.indices) {
+                //    i("Placemark[$i]:${this.app.charitymarks[i]}")
+                //}
                // finish() the activity - and set a result code
                 // end CharitymarkActivity - and update the List view.
                 setResult(RESULT_OK)

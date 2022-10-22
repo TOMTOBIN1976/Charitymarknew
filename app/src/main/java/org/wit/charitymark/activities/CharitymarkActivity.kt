@@ -2,7 +2,10 @@ package org.wit.charitymark.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
+import org.wit.charitymark.R
 import org.wit.charitymark.databinding.ActivityCharitymarkBinding
 import org.wit.charitymark.main.MainApp
 import org.wit.charitymark.models.CharitymarkModel
@@ -22,6 +25,9 @@ class CharitymarkActivity : AppCompatActivity() {
         // inflate our layout using this binding class
         binding = ActivityCharitymarkBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // Enable toolbar (for cancelling a charity event before adding)
+        binding.toolbarAdd.title = title
+        setSupportActionBar(binding.toolbarAdd)
 
         app = application as MainApp
         i("Charitymark Activity started.")
@@ -45,5 +51,19 @@ class CharitymarkActivity : AppCompatActivity() {
                     .show()
             }
         }
+    }
+    // inflate the menu_charitymark to display CANCEL menu on
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_charitymark, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    // handle the menu CANCEL event with this method
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_cancel -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

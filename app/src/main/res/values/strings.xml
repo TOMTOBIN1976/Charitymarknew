@@ -4,4 +4,5 @@
     <string name="hint_charitymarkTitle">Charity event Title</string>
     <string name="hint_charitymarkDescription">Description </string>
     <string name="menu_addCharitymark">Add</string>
+    <string name="menu_cancelCharitymark">Cancel</string>
 </resources>

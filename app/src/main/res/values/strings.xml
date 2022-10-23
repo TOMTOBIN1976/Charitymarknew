@@ -7,4 +7,6 @@
     <string name="menu_cancelCharitymark">Cancel</string>
     <string name="enter_charitymark_title"> Please enter a Charity event Title </string>
     <string name="save_charitymark"> Save Charity event </string>
+    <string name="button_addImage"> Add Image </string>
+    <string name="select_charitymark_image">Select Charity event image</string>
 </resources>

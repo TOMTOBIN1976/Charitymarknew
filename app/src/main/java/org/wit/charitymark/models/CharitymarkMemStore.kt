@@ -23,10 +23,10 @@ class CharitymarkMemStore : CharitymarkStore {
     }
 
     override fun update(charitymark: CharitymarkModel) {
-        var foundCharityark: CharitymarkModel? = charitymarks.find { p -> p.id == charitymark.id }
-        if (foundCharityark != null) {
-            foundCharityark.title = charitymark.title
-            foundCharityark.description = charitymark.description
+        var foundCharitymark: CharitymarkModel? = charitymarks.find { p -> p.id == charitymark.id }
+        if (foundCharitymark != null) {
+            foundCharitymark.title = charitymark.title
+            foundCharitymark.description = charitymark.description
             logAll()
         }
     }

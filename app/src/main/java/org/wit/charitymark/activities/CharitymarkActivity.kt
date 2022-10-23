@@ -1,13 +1,17 @@
 package org.wit.charitymark.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.BoringLayout.make
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
 import org.wit.charitymark.R
 import org.wit.charitymark.databinding.ActivityCharitymarkBinding
+import org.wit.charitymark.helpers.showImagePicker
 import org.wit.charitymark.main.MainApp
 import org.wit.charitymark.models.CharitymarkModel
 import timber.log.Timber
@@ -20,6 +24,7 @@ class CharitymarkActivity : AppCompatActivity() {
     // creating a charitymark as a class member (used in event handler btnAdd.setOnClickListener)
     var charitymark = CharitymarkModel()
     lateinit var app: MainApp
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +70,12 @@ class CharitymarkActivity : AppCompatActivity() {
             setResult(RESULT_OK)
             finish()
         }
+        // Event handler for image button
+        binding.chooseImage.setOnClickListener {
+            showImagePicker(imageIntentLauncher)
+        }
+
+        registerImagePickerCallback()
     }
     // inflate the menu_charitymark to display CANCEL menu on
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -79,5 +90,20 @@ class CharitymarkActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when(result.resultCode){
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Result ${result.data!!.data}")
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
     }
 }

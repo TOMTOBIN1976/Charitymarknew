@@ -16,17 +16,17 @@ class CharitymarkMemStore : CharitymarkStore {
         return charitymarks
     }
 
-    override fun create(placemark: CharitymarkModel) {
-        placemark.id = getId()
-        charitymarks.add(placemark)
+    override fun create(charitymark: CharitymarkModel) {
+        charitymark.id = getId()
+        charitymarks.add(charitymark)
         logAll()
     }
 
-    override fun update(placemark: CharitymarkModel) {
-        var foundPlacemark: CharitymarkModel? = charitymarks.find { p -> p.id == placemark.id }
-        if (foundPlacemark != null) {
-            foundPlacemark.title = placemark.title
-            foundPlacemark.description = placemark.description
+    override fun update(charitymark: CharitymarkModel) {
+        var foundCharityark: CharitymarkModel? = charitymarks.find { p -> p.id == charitymark.id }
+        if (foundCharityark != null) {
+            foundCharityark.title = charitymark.title
+            foundCharityark.description = charitymark.description
             logAll()
         }
     }

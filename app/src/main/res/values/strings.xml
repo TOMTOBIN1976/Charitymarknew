@@ -5,4 +5,6 @@
     <string name="hint_charitymarkDescription">Description </string>
     <string name="menu_addCharitymark">Add</string>
     <string name="menu_cancelCharitymark">Cancel</string>
+    <string name="enter_charitymark_title"> Please enter a Charity event Title </string>
+    <string name="save_charitymark"> Save Charity event </string>
 </resources>

@@ -2,6 +2,7 @@ package org.wit.charitymark.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.BoringLayout.make
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
@@ -22,6 +23,9 @@ class CharitymarkActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //ocal flag initialised to false:
+        var edit = false
+
         // inflate our layout using this binding class
         binding = ActivityCharitymarkBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -33,31 +37,33 @@ class CharitymarkActivity : AppCompatActivity() {
         i("Charitymark Activity started.")
 
         if (intent.hasExtra("charitymark_edit")) {
+            //Set the flag to true if we have a charity event passed
+            edit = true
             charitymark = intent.extras?.getParcelable("charitymark_edit")!!
             binding.charitymarkTitle.setText(charitymark.title)
             binding.description.setText(charitymark.description)
+            // Save Charity event button label CharitymarkActivity is launched with a charity event passed to it.
+            binding.btnAdd.setText(R.string.save_charitymark)
         }
 
         // bind to the Button
+        // Adding update functionality (when charity event selected from charity event list activity)
         binding.btnAdd.setOnClickListener() {
             charitymark.title = binding.charitymarkTitle.text.toString()
             charitymark.description = binding.description.text.toString()
-            if (charitymark.title.isNotEmpty()) {
-                //app.charitymarks.add(charitymark.copy())
-                app.charitymarks.create(charitymark.copy())
-                //i("add Button Pressed: ${charitymark}")
-                //for (i in app.charitymarks.indices) {
-                //    i("Placemark[$i]:${this.app.charitymarks[i]}")
-                //}
-               // finish() the activity - and set a result code
-                // end CharitymarkActivity - and update the List view.
-                setResult(RESULT_OK)
-                finish()
-            }
-            else {
-                Snackbar.make(it,"Please Enter a title", Snackbar.LENGTH_LONG)
+            if (charitymark.title.isEmpty()) {
+                Snackbar.make(it,R.string.enter_charitymark_title, Snackbar.LENGTH_LONG)
                     .show()
+            } else {
+                if (edit) {
+                    app.charitymarks.update(charitymark.copy())
+                } else {
+                    app.charitymarks.create(charitymark.copy())
+                }
             }
+            i("add Button Pressed: $charitymark")
+            setResult(RESULT_OK)
+            finish()
         }
     }
     // inflate the menu_charitymark to display CANCEL menu on

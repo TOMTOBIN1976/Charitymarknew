@@ -58,4 +58,11 @@ class CharitymarkListActivity : AppCompatActivity(), CharitymarkListener {
         launcherIntent.putExtra("charitymark_edit", charitymark)
         startActivityForResult(launcherIntent,0)
     }
+
+    // lifecycle event - triggered when an activity started finishes.
+    // Inform recyclerView's adapter that model has been updated (edited charity events will display).
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        binding.recyclerView.adapter?.notifyDataSetChanged()
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 }

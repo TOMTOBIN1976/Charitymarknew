@@ -9,6 +9,7 @@ import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import org.wit.charitymark.R
 import org.wit.charitymark.databinding.ActivityCharitymarkBinding
 import org.wit.charitymark.helpers.showImagePicker
@@ -74,7 +75,7 @@ class CharitymarkActivity : AppCompatActivity() {
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
-
+        //  initialise the callback function
         registerImagePickerCallback()
     }
     // inflate the menu_charitymark to display CANCEL menu on
@@ -100,6 +101,10 @@ class CharitymarkActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
+                            charitymark.image = result.data!!.data!!
+                            Picasso.get()
+                                .load(charitymark.image)
+                                .into(binding.charitymarkImage)
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }

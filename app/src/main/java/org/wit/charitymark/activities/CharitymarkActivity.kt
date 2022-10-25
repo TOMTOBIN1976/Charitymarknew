@@ -26,6 +26,7 @@ class CharitymarkActivity : AppCompatActivity() {
     var charitymark = CharitymarkModel()
     lateinit var app: MainApp
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    val IMAGE_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,9 @@ class CharitymarkActivity : AppCompatActivity() {
             binding.description.setText(charitymark.description)
             // Save Charity event button label CharitymarkActivity is launched with a charity event passed to it.
             binding.btnAdd.setText(R.string.save_charitymark)
+            Picasso.get()
+                .load(charitymark.image)
+                .into(binding.charitymarkImage)
         }
 
         // bind to the Button

@@ -3,6 +3,7 @@ package org.wit.charitymark.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import org.wit.charitymark.databinding.CardCharitymarkBinding
 import org.wit.charitymark.models.CharitymarkModel
 
@@ -34,6 +35,8 @@ class CharitymarkAdapter constructor(private var charitymarks: List<CharitymarkM
         fun bind(charitymark: CharitymarkModel, listener: CharitymarkListener) {
             binding.charitymarkTitle.text = charitymark.title
             binding.description.text = charitymark.description
+            // initialise imageView from model using Picasso
+            Picasso.get().load(charitymark.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onCharitymarkClick(charitymark) }
         }
     }

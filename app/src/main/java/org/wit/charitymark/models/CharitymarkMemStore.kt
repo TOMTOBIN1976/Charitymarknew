@@ -21,12 +21,13 @@ class CharitymarkMemStore : CharitymarkStore {
         charitymarks.add(charitymark)
         logAll()
     }
-
+// Update function - used in editing
     override fun update(charitymark: CharitymarkModel) {
         var foundCharitymark: CharitymarkModel? = charitymarks.find { p -> p.id == charitymark.id }
         if (foundCharitymark != null) {
             foundCharitymark.title = charitymark.title
             foundCharitymark.description = charitymark.description
+            foundCharitymark.image = charitymark.image
             logAll()
         }
     }

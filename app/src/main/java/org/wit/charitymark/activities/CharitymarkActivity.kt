@@ -1,6 +1,7 @@
 package org.wit.charitymark.activities
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.BoringLayout.make
@@ -54,6 +55,10 @@ class CharitymarkActivity : AppCompatActivity() {
             Picasso.get()
                 .load(charitymark.image)
                 .into(binding.charitymarkImage)
+            // If editing image - Change button label to be Change Image from Add Image.
+            if (charitymark.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.change_charitymark_image)
+            }
         }
 
         // bind to the Button

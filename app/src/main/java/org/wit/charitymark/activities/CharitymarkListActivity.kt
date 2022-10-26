@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.charitymark.R
 import org.wit.charitymark.adapters.CharitymarkAdapter
@@ -17,6 +19,7 @@ class CharitymarkListActivity : AppCompatActivity(), CharitymarkListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityCharitymarkListBinding
+    private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,9 @@ class CharitymarkListActivity : AppCompatActivity(), CharitymarkListener {
         //binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks)
         //binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks.findAll())
         binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks.findAll(),this)
+
+        // callback
+        registerRefreshCallback()
     }
     //override the method to load menu resource.
     // Single button on the action bar (calling menu_main.xml)
@@ -47,7 +53,7 @@ class CharitymarkListActivity : AppCompatActivity(), CharitymarkListener {
         when (item.itemId) {
             R.id.item_add -> {
                 val launcherIntent = Intent(this, CharitymarkActivity::class.java)
-                startActivityForResult(launcherIntent,0)
+                refreshIntentLauncher.launch(launcherIntent)
             }
         }
         return super.onOptionsItemSelected(item)
@@ -56,13 +62,12 @@ class CharitymarkListActivity : AppCompatActivity(), CharitymarkListener {
     override fun onCharitymarkClick(charitymark: CharitymarkModel) {
         val launcherIntent = Intent(this, CharitymarkActivity::class.java)
         launcherIntent.putExtra("charitymark_edit", charitymark)
-        startActivityForResult(launcherIntent,0)
+        refreshIntentLauncher.launch(launcherIntent)
     }
 
-    // lifecycle event - triggered when an activity started finishes.
-    // Inform recyclerView's adapter that model has been updated (edited charity events will display).
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        binding.recyclerView.adapter?.notifyDataSetChanged()
-        super.onActivityResult(requestCode, resultCode, data)
+    private fun registerRefreshCallback() {
+        refreshIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { binding.recyclerView.adapter?.notifyDataSetChanged() }
     }
 }

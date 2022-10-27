@@ -28,6 +28,7 @@ class CharitymarkActivity : AppCompatActivity() {
     lateinit var app: MainApp
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     val IMAGE_REQUEST = 1
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,8 +85,19 @@ class CharitymarkActivity : AppCompatActivity() {
         binding.chooseImage.setOnClickListener {
             showImagePicker(imageIntentLauncher)
         }
+        // Event handler for set location button
+        binding.charitymarkLocation.setOnClickListener {
+            i ("Set Location Pressed")
+        }
+        // Event handler for maps
+        binding.charitymarkLocation.setOnClickListener {
+            val launcherIntent = Intent(this, MapActivity::class.java)
+            mapIntentLauncher.launch(launcherIntent)
+        }
+
         //  initialise the callback function
         registerImagePickerCallback()
+        registerMapCallback()
     }
     // inflate the menu_charitymark to display CANCEL menu on
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -119,5 +131,11 @@ class CharitymarkActivity : AppCompatActivity() {
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
+    }
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { i("Map Loaded") }
     }
 }

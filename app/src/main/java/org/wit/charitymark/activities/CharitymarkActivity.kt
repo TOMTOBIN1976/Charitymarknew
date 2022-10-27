@@ -16,6 +16,7 @@ import org.wit.charitymark.databinding.ActivityCharitymarkBinding
 import org.wit.charitymark.helpers.showImagePicker
 import org.wit.charitymark.main.MainApp
 import org.wit.charitymark.models.CharitymarkModel
+import org.wit.charitymark.models.Location
 import timber.log.Timber
 import timber.log.Timber.i
 
@@ -91,7 +92,9 @@ class CharitymarkActivity : AppCompatActivity() {
         }
         // Event handler for maps
         binding.charitymarkLocation.setOnClickListener {
+            val location = Location(52.374530, -7.925247, 15f)
             val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
         }
 

@@ -36,9 +36,10 @@ class CharitymarkListActivity : AppCompatActivity(), CharitymarkListener {
         //Replaced with memory store
         //binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks)
         //binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks.findAll())
-        binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks.findAll(),this)
+        //binding.recyclerView.adapter = CharitymarkAdapter(app.charitymarks.findAll(),this)
+        binding.recyclerView.layoutManager = layoutManager
+        loadCharitymarks()
 
-        // callback
         registerRefreshCallback()
     }
     //override the method to load menu resource.
@@ -68,6 +69,15 @@ class CharitymarkListActivity : AppCompatActivity(), CharitymarkListener {
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { binding.recyclerView.adapter?.notifyDataSetChanged() }
+            { loadCharitymarks() }
+    }
+
+    private fun loadCharitymarks() {
+        showCharitymarks(app.charitymarks.findAll())
+    }
+
+    fun showCharitymarks (charitymarks: List<CharitymarkModel>) {
+        binding.recyclerView.adapter = CharitymarkAdapter(charitymarks, this)
+        binding.recyclerView.adapter?.notifyDataSetChanged()
     }
 }

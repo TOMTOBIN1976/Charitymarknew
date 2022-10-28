@@ -28,6 +28,9 @@ class CharitymarkMemStore : CharitymarkStore {
             foundCharitymark.title = charitymark.title
             foundCharitymark.description = charitymark.description
             foundCharitymark.image = charitymark.image
+            foundCharitymark.lat = charitymark.lat
+            foundCharitymark.lng = charitymark.lng
+            foundCharitymark.zoom = charitymark.zoom
             logAll()
         }
     }

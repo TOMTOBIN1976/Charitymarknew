@@ -43,6 +43,18 @@ class CharitymarkJSONStore(private val context: Context) : CharitymarkStore {
 
     override fun update(charitymark: CharitymarkModel) {
         // todo
+        val foundCharitymark: CharitymarkModel? = charitymarks.find { p -> p.id == charitymark.id }
+        if (foundCharitymark != null) {
+            foundCharitymark.title = charitymark.title
+            foundCharitymark.description = charitymark.description
+            foundCharitymark.eventdate = charitymark.eventdate
+            foundCharitymark.eventcounty = charitymark.eventcounty
+            foundCharitymark.image = charitymark.image
+            foundCharitymark.lat = charitymark.lat
+            foundCharitymark.lng = charitymark.lng
+            foundCharitymark.zoom = charitymark.zoom
+            logAll()
+        }
     }
 
     private fun serialize() {

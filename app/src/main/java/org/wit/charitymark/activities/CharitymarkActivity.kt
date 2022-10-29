@@ -53,6 +53,8 @@ class CharitymarkActivity : AppCompatActivity() {
             charitymark = intent.extras?.getParcelable("charitymark_edit")!!
             binding.charitymarkTitle.setText(charitymark.title)
             binding.description.setText(charitymark.description)
+            binding.charitymarkEventdate.setText(charitymark.eventdate)
+            binding.charitymarkEventcounty.setText(charitymark.eventcounty)
             // Save Charity event button label CharitymarkActivity is launched with a charity event passed to it.
             binding.btnAdd.setText(R.string.save_charitymark)
             Picasso.get()
@@ -69,6 +71,9 @@ class CharitymarkActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener() {
             charitymark.title = binding.charitymarkTitle.text.toString()
             charitymark.description = binding.description.text.toString()
+            charitymark.eventdate = binding.charitymarkEventdate.text.toString()
+            charitymark.eventcounty = binding.charitymarkEventcounty.text.toString()
+
             if (charitymark.title.isEmpty()) {
                 Snackbar.make(it,R.string.enter_charitymark_title, Snackbar.LENGTH_LONG)
                     .show()

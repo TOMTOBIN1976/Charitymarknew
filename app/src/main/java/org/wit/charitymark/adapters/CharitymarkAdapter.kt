@@ -35,6 +35,9 @@ class CharitymarkAdapter constructor(private var charitymarks: List<CharitymarkM
         fun bind(charitymark: CharitymarkModel, listener: CharitymarkListener) {
             binding.charitymarkTitle.text = charitymark.title
             binding.description.text = charitymark.description
+            binding.charitymarkEventdate.text = charitymark.eventdate
+            binding.charitymarkEventcounty.text = charitymark.eventcounty
+
             // initialise imageView from model using Picasso
             Picasso.get().load(charitymark.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onCharitymarkClick(charitymark) }

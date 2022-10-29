@@ -12,4 +12,6 @@
     <string name="change_charitymark_image">Change charitymark image</string>
     <string name="button_location">Add Location</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="hint_charitymarkEventdate"> Please enter Charity event date </string>
+    <string name="hint_charitymarkEventcounty"> Please enter Charity county </string>
 </resources>
